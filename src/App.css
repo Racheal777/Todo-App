@@ -1,38 +1,134 @@
-.App {
-  text-align: center;
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.main{
+  margin: 1em auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+form{
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  place-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 1em;
+  
+  
+}
+form button{
+  border: none;
+  padding: 8px 19px;
+ font-size: 1em;
+ margin-left: 12px;
+ background-color: rgba(8, 133, 206, 0.897); 
+  border-radius: 5px;
+  margin-bottom: 1rem;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+form input{
+  padding: 14px 10px;
+  margin-bottom: 1rem;
+  width: 40%;
+  box-shadow: 0px 0px 2px 0px gray;
+  border: none;
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+input:focus{
+  outline: none;
+}
+
+.check{
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  /* justify-content: space-evenly; */
+ 
+}
+
+.check input{
+  margin-top: 10px;
+  margin-right: 10px;
+  min-height: 20%;
+}
+
+.check p{
+  padding: 5px;
+  /* width: 60%; */
+}
+.todo{
+  margin: 2.5rem 3rem;
+  display: flex;
+  flex-grow: inherit;
+  flex-wrap: wrap;
+  /* width: 90%; */
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 0px 6px 0px gray;
+  padding: 0.7rem 0.5rem;
+}
+
+
+.btn{
+  display: flex;
+
+}
+.todo button{
+  border: none;
+  padding: 0.5rem 1.6rem;
+ font-size: 1em;
+ margin: 6px;
+  border-radius: 5px;
+  color: white;
+
+}
+
+.todoCard{
+  background-color: rgb(247, 243, 236);
+  margin:  2em auto;
+  padding: 1.5em 0.5em;
+  width: 60%;
+  text-align: center;
+  box-shadow: 0px 0px 6px 0px gray;
+
+}
+
+.todoCard h2{
+  text-align: center;
+  padding: 1em;
+  font-family: fantasy;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.todoCard p span{
+text-align: center;
+  padding: 1em;
+  font-family: fantasy;
+  font-weight: bold;
+  font-size: 1.2em;
+  /* margin-bottom: 2.6em; */
+}
+.pending{
+  border: none;
+  padding: 0.5rem 1.6rem;
+ font-size: 1em;
+ font-weight: bold;
+ margin: 6px;
+  border-radius: 5px;
+  color: rgb(7, 97, 26);
+  /* background-color: rgba(3, 95, 57, 0.897);  */
+}
+.delete{
+  background-color: rgb(233, 44, 44);
+}
+
+.not{
+  text-align: center;
+  font-size: 1em;
+  font-weight: bold;
+  padding: 1em;
 }
