@@ -1,7 +1,7 @@
 import React from 'react'
 import Todo from './todo'
 
-function todos( {tasks, deleteTodo, update}) {
+function Todos( {tasks, deleteTodo, update}) {
     // console.log(tasks)
 
 
@@ -24,4 +24,4 @@ function todos( {tasks, deleteTodo, update}) {
   )
 }
 
-export default todos
+export default Todos
