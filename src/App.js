@@ -21,7 +21,7 @@ function App() {
 
       setLoading(true);
       // console.log(loading)
-      const add = await axios.post("http://localhost:7000/savetodo", {
+      const add = await axios.post("http://localhost:7070/savetodo", {
         todo: input,
       });
 
@@ -44,7 +44,7 @@ function App() {
     try {
       setLoading(true);
       const deleteATodo = await axios.delete(
-        `http://localhost:7000/deletetodo/${id}`
+        `http://localhost:7070/deletetodo/${id}`
       );
 
       // console.log(deleteATodo);
@@ -57,19 +57,22 @@ function App() {
   //Update
   const update = async (id) => {
     try {
-      setLoading(false)
-      const getOne = await axios.get(`http://localhost:7000/gettodo/${id}`)
+      setLoading(true)
+      const getOne = await axios.get(`http://localhost:7070/gettodo/${id}`)
       const {data} = getOne
       console.log(data)
 
-      setLoading(true)
+      // setLoading(false)
       if(getOne.data.status === "pending"){
-        let updated = await axios.put(`http://localhost:7000/updatetodo/${getOne.data._id}`,{
+        let updated = await axios.put(`http://localhost:7070/updatetodo/${getOne.data._id}`,{
           
           status: 'done'
-        }) 
+        })
+
+
+        // setLoading(true)  
       }else{
-        let updated = await axios.put(`http://localhost:7000/updatetodo/${data._id}`,{
+        let updated = await axios.put(`http://localhost:7070/updatetodo/${data._id}`,{
           
           status: 'pending'}) 
           console.log(updated)
@@ -87,7 +90,7 @@ function App() {
 
   useEffect(() => {
     const fetching = async () => {
-      const getTodos = await axios.get("http://localhost:7000/gettodo");
+      const getTodos = await axios.get("http://localhost:7070/gettodo");
 
       // console.log(getTodos);
 
@@ -153,8 +156,9 @@ function App() {
   return (
     <div className="todoCard">
       <h2>To-do App</h2>
+
       <div className="main">
-        <form onSubmit={addTodo}>
+        <form onSubmit={addTodo} className="form">
           <input
             type="text"
             placeholder="add a todo ...."
