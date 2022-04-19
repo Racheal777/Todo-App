@@ -96,6 +96,7 @@ function App() {
 
       const { data } = getTodos;
 
+      
       setTodos(data);
     };
     fetching();

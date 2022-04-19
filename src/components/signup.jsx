@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Navigate, NavLink } from "react-router-dom";
+import { Navigate, NavLink,  useNavigate} from "react-router-dom";
+
+
 
 const Signup = () => {
   const [ email, setEmail ] = useState("");
@@ -8,7 +10,7 @@ const Signup = () => {
   const [ username, setUsername ] = useState("");
   const [ confirmPassword, setconfirmPassword ] = useState("");
   
-
+  let navigate = useNavigate();
   //function for saving the data
   const addUser = async (e) => {
     try {
@@ -19,15 +21,20 @@ const Signup = () => {
         username: username,
         email: email,
         password: password,
-      });
+      },
+      {withCredentials: true});
 
       setEmail("");
       setPassword('')
       setUsername('')
       const res = firstu.data
 
+      //if user is saved navigate to the todo page
       if(res.user){
-          <Navigate to="/todo"></Navigate>
+        navigate('/todo')
+        // <Navigate to='/todo'></Navigate>
+        // <Redirect to="/todo"></Redirect>
+          
       }
       console.log(res.user);
 

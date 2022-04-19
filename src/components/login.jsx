@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import { Navigate, useNavigate} from "react-router-dom";
+
+
 
 export default function Login() {
   //state for the user input
@@ -8,7 +11,9 @@ export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [ error , setError ] = useState('')
 
+  const navigate = useNavigate()
   //function for saving the data
   //using the spread operator to get access to each object and assigning the value
   //to the field that matches the name
@@ -20,13 +25,20 @@ export default function Login() {
       const firstu = await axios.post("http://localhost:7070/api/users/login", {
         email: email,
         password: password,
-      });
+      },
+      //adding credentials to enable it set the cookie from the server
+      { withCredentials: true});
 
       const res = firstu.data;
       setEmail("");
       setPassword("");
       setLoading(false);
+      
+      if(res.user){
+        navigate('/todo')
+      }
 
+      
       console.log(res);
     } catch (error) {
       console.log(error);
