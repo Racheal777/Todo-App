@@ -16,11 +16,11 @@ const Signup = () => {
     try {
       e.preventDefault();
     
-
+      //making a request to the api with axios for saving user data
       const firstu = await axios.post("http://localhost:7070/api/users/save", {
-        username: username,
-        email: email,
-        password: password,
+         username,
+         email,
+         password,
       },
       {withCredentials: true});
 
@@ -43,7 +43,7 @@ const Signup = () => {
     }
   };
 
-  console.log(email, password, username);
+  // console.log(email, password, username);
   return (
     <div>
       <section className="form-body">

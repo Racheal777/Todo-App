@@ -23,8 +23,8 @@ export default function Login() {
 
       setLoading(true);
       const firstu = await axios.post("http://localhost:7070/api/users/login", {
-        email: email,
-        password: password,
+        email,
+       password,
       },
       //adding credentials to enable it set the cookie from the server
       { withCredentials: true});
@@ -34,7 +34,8 @@ export default function Login() {
       setPassword("");
       setLoading(false);
       
-      if(res.user){
+      //if user is found, navigate the user to the todo app
+      if(res){
         navigate('/todo')
       }
 
@@ -44,16 +45,16 @@ export default function Login() {
       console.log(error);
     }
   };
-    console.log(email, password);
+    // console.log(email, password);
 
-  useEffect(() => {
-    console.log("user is loading");
-  }, [loading]);
+  // useEffect(() => {
+  //   console.log("user is loading");
+  // }, [loading]);
 
   return (
     <div>
       <section className="form-body">
-        <form>
+        <form onSubmit={addUser}>
           <div className="title">
             <p>Welcome back </p>
             <h2>Login</h2>

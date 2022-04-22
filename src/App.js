@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Todos from "./components/todos";
 import "./App.css";
+import { Navigate, useNavigate} from "react-router-dom";
+
 
 function App() {
   const [input, setInput] = useState("");
@@ -11,7 +13,7 @@ function App() {
   const [number, setNumber] = useState(0);
   const [done, setDone] = useState(0);
   const [loading, setLoading] = useState(false);
-  
+  let navigate = useNavigate();
 
   //adding a new todo to the list
   const addTodo = async (event) => {
@@ -28,10 +30,7 @@ function App() {
       setInput("");
 
       setLoading(false);
-      // console.log(loading)
-
-      // const res = add.data;
-      // console.log(res);
+      
     } catch (error) {
       console.log(error);
     }
@@ -44,7 +43,8 @@ function App() {
     try {
       setLoading(true);
       const deleteATodo = await axios.delete(
-        `http://localhost:7070/deletetodo/${id}`
+        `http://localhost:7070/deletetodo/${id}`,
+        {withCredentials: true}
       );
 
       // console.log(deleteATodo);
@@ -60,25 +60,23 @@ function App() {
       setLoading(true)
       const getOne = await axios.get(`http://localhost:7070/gettodo/${id}`)
       const {data} = getOne
+      
       console.log(data)
 
       // setLoading(false)
       if(getOne.data.status === "pending"){
-        let updated = await axios.put(`http://localhost:7070/updatetodo/${getOne.data._id}`,{
-          
-          status: 'done'
-        })
-
-
-        // setLoading(true)  
-      }else{
         let updated = await axios.put(`http://localhost:7070/updatetodo/${data._id}`,{
           
-          status: 'pending'}) 
-          console.log(updated)
+          status: 'done'
+        }, {withCredentials: false} )
+        // setLoading(true)  
+      }else{
+        let updat = await axios.put(`http://localhost:7070/updatetodo/${data._id}`,{
+          
+          status: 'pending'},
+          {withCredentials: false}) 
+          console.log(updat)
       }
-
-
       setLoading(false)
        
     } catch (error) {
@@ -91,17 +89,14 @@ function App() {
   useEffect(() => {
     const fetching = async () => {
       const getTodos = await axios.get("http://localhost:7070/gettodo");
-
-      // console.log(getTodos);
-
-      const { data } = getTodos;
-
-      
-      setTodos(data);
+      // const { data } = getTodos;
+      setTodos(getTodos.data);
     };
     fetching();
     // console.log(loading)
   }, [loading]);
+
+
   // const addTodo =(e) => {
   //   e.preventDefault()
   //    const todo = {
@@ -136,6 +131,24 @@ function App() {
   //   setTodos([...mapped]);
   // };
 
+  const logout = async () => {
+    try {
+      
+     const logg =  await axios.get("http://localhost:7070/api/users/loggingout",
+     {withCredentials: true})
+     
+     console.log(logg)
+    //navigating to homepage after looging out
+     if(logg.data){
+      navigate('/')
+     }
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+  // logout()
+
+  
   //function to check the length of the todos
   //using filter to filter through the status
   //using useEffect to re render the function anytime a task is added
@@ -156,6 +169,10 @@ function App() {
 
   return (
     <div className="todoCard">
+      <div className="logout">
+      <button type="button" onClick={logout}>Logout</button>
+      </div>
+      
       <h2>To-do App</h2>
 
       <div className="main">

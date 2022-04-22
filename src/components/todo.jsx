@@ -23,7 +23,7 @@ function Todo({ duty, del, update }) {
             type="checkbox"
             name="Check"
             checked={check}
-            onChange={!check}
+            onChange={() => setCheck(!check)}
           />
 
           <p className="pp" onClick={() => update(duty._id)}>
