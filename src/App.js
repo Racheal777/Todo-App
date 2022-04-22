@@ -68,13 +68,13 @@ function App() {
         let updated = await axios.put(`http://localhost:7070/updatetodo/${data._id}`,{
           
           status: 'done'
-        }, {withCredentials: false} )
+        }, {withCredentials: true} )
         // setLoading(true)  
       }else{
         let updat = await axios.put(`http://localhost:7070/updatetodo/${data._id}`,{
           
           status: 'pending'},
-          {withCredentials: false}) 
+          {withCredentials: true}) 
           console.log(updat)
       }
       setLoading(false)
