@@ -31,7 +31,9 @@ const Signup = () => {
 
       //if user is saved navigate to the todo page
       if(res.user){
-        navigate('/todo')
+        navigate('/')
+        // window.localStorage.setItem('userId',JSON.stringify(res._id))
+        // window.localStorage.setItem('name', JSON.stringify(res.username))
         // <Navigate to='/todo'></Navigate>
         // <Redirect to="/todo"></Redirect>
           

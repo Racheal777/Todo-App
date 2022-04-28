@@ -2,17 +2,15 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Todos from "./components/todos";
 import "./App.css";
-import { Navigate, useNavigate} from "react-router-dom";
-
+import { Navigate, useNavigate } from "react-router-dom";
 
 function App() {
-  const [input, setInput] = useState("");
-
-  const [statuss, setStatuss] = useState("pending");
-  const [todos, setTodos] = useState([]);
-  const [number, setNumber] = useState(0);
-  const [done, setDone] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [ input, setInput ] = useState("");
+  
+  const [ todos, setTodos ] = useState([]);
+  
+  const [ done, setDone ] = useState(0);
+  const [ loading, setLoading ] = useState(false);
   let navigate = useNavigate();
 
   //adding a new todo to the list
@@ -23,18 +21,20 @@ function App() {
 
       setLoading(true);
       // console.log(loading)
-      const add = await axios.post("http://localhost:7070/savetodo", {
+      const add = await axios.post(`http://localhost:7070/savetodo/${JSON.parse(localStorage.getItem('userId'))}`, {
         todo: input,
+        // id: JSON.parse(localStorage.getItem('userId'))
       });
 
       setInput("");
 
       setLoading(false);
-      
     } catch (error) {
       console.log(error);
     }
   };
+
+
   //delete a todo
   //using the loading in the useeffect to allow it function apply to the delete
   // when loading is true whilst deleting
@@ -44,9 +44,8 @@ function App() {
       setLoading(true);
       const deleteATodo = await axios.delete(
         `http://localhost:7070/deletetodo/${id}`,
-        {withCredentials: true}
+        { withCredentials: true }  
       );
-
       // console.log(deleteATodo);
       setLoading(false);
     } catch (error) {
@@ -54,48 +53,52 @@ function App() {
     }
   };
 
-  //Update
+  //Update by first fetching one todo, 
+  //then we check it status and update accordingly
   const update = async (id) => {
     try {
-      setLoading(true)
-      const getOne = await axios.get(`http://localhost:7070/gettodo/${id}`)
-      const {data} = getOne
-      
-      console.log(data)
+      setLoading(true);
+      const getOne = await axios.get(`http://localhost:7070/gettodo/${id}`);
+      const { data } = getOne;
 
       // setLoading(false)
-      if(getOne.data.status === "pending"){
-        let updated = await axios.put(`http://localhost:7070/updatetodo/${data._id}`,{
-          
-          status: 'done'
-        }, {withCredentials: true} )
-        // setLoading(true)  
-      }else{
-        let updat = await axios.put(`http://localhost:7070/updatetodo/${data._id}`,{
-          
-          status: 'pending'},
-          {withCredentials: true}) 
-          console.log(updat)
+      if (data.status === "pending") {
+        let updated = await axios.put(
+          `http://localhost:7070/updatetodo/${data._id}`,
+          {
+            status: "done",
+          },
+          { withCredentials: true }
+        );
+        // setLoading(true)
+      } else {
+        let updat = await axios.put(
+          `http://localhost:7070/updatetodo/${data._id}`,
+          {
+            status: "pending",
+          },
+          { withCredentials: true }
+        );
+        console.log(updat);
       }
-      setLoading(false)
-       
+      setLoading(false);
     } catch (error) {
-      console.log(error)
-      
+      console.log(error);
     }
-    
-  }
+  };
 
+  //fetching all todos
   useEffect(() => {
     const fetching = async () => {
-      const getTodos = await axios.get("http://localhost:7070/gettodo");
-      // const { data } = getTodos;
-      setTodos(getTodos.data);
+      const getTodos = await axios.get(`http://localhost:7070/api/users/oneuser/${JSON.parse(localStorage.getItem('userId'))}`);
+      const { data } = getTodos;
+      // const res = getTodos.data
+      console.log(data)
+      setTodos(data.user.todos);
     };
     fetching();
     // console.log(loading)
   }, [loading]);
-
 
   // const addTodo =(e) => {
   //   e.preventDefault()
@@ -133,22 +136,24 @@ function App() {
 
   const logout = async () => {
     try {
-      
-     const logg =  await axios.get("http://localhost:7070/api/users/loggingout",
-     {withCredentials: true})
-     
-     console.log(logg)
-    //navigating to homepage after looging out
-     if(logg.data){
-      navigate('/')
-     }
+      const logg = await axios.get(
+        "http://localhost:7070/api/users/loggingout",
+        { withCredentials: true }
+      );
+
+      console.log(logg);
+      //navigating to homepage after looging out
+      if (logg.data) {
+        navigate("/");
+        localStorage.removeItem("userId")
+        localStorage.removeItem("name")
+      }
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
-  }
+  };
   // logout()
 
-  
   //function to check the length of the todos
   //using filter to filter through the status
   //using useEffect to re render the function anytime a task is added
@@ -170,11 +175,13 @@ function App() {
   return (
     <div className="todoCard">
       <div className="logout">
-      <button type="button" onClick={logout}>Logout</button>
+        <button type="button" onClick={logout}>
+          Logout
+        </button>
       </div>
-      
-      <h2>To-do App</h2>
 
+      <h2>To-do App</h2>
+    <p>Welcome <strong>{JSON.parse(localStorage.getItem("name"))}</strong></p>
       <div className="main">
         <form onSubmit={addTodo} className="form">
           <input
@@ -201,7 +208,7 @@ function App() {
       )}
 
       <Todos tasks={todos} deleteTodo={deleteTodo} update={update} />
-      {/* <p>{empty}</p> */}
+      
     </div>
   );
 }

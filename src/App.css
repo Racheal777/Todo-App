@@ -4,6 +4,20 @@
   padding: 0;
   
 }
+body{
+  background: #43cea2;  
+background: -webkit-linear-gradient(to right, #185a9d, #43cea2);  
+background: linear-gradient(to right, #185a9d, #43cea2); 
+
+
+}
+strong{
+  font-size: 1.8em;
+  color: white; 
+  font-family: cursive;
+  padding: 0 5px;
+  line-height: 10px;
+}
 
 html{
   transition: all 0.6s ease-in;
@@ -65,11 +79,12 @@ input:focus{
   /* width: 60%; */
 }
 .todo{
-  margin: 2.5rem 3rem;
+  margin: 2.5rem 5rem;
   display: flex;
   flex-grow: inherit;
   flex-wrap: wrap;
   /* width: 90%; */
+  background-color: aliceblue;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0px 0px 6px 0px gray;
@@ -116,9 +131,10 @@ input:focus{
 
 .todoCard h2{
   text-align: center;
-  padding: 1em;
+  padding: 0.6em;
   font-family: fantasy;
   font-weight: bold;
+  color: aliceblue;
   text-transform: uppercase;
 }
 

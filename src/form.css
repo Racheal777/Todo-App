@@ -16,8 +16,14 @@
     flex-direction: column;
     justify-content: center; */
     align-items: center;
+    background: rgba(255, 255, 255, 0.34);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(4.9px);
+-webkit-backdrop-filter: blur(4.9px);
+border: 1px solid rgba(255, 255, 255, 0.3);
     margin: 4em auto;
-    background-color: rgb(216, 234, 250);
+    /* background-color: rgb(216, 234, 250); */
     padding: 2em;
     border-radius: 5px;
 
@@ -26,7 +32,7 @@
 
 .form-body input{
     padding: 14px 12px;
-    border: none;
+    border: 1px solid rgb(187, 184, 184);
     outline: none;
     width: 100%;
 }
