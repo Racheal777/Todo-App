@@ -10,14 +10,14 @@ function Todo({ duty, del, update }) {
   }, [check]);
   return (
     <div>
-      <div className="todo">
-        <div
-          className="check"
+      <div className="todo" 
           style={
             duty.status === "done" || check
-              ? { textDecoration: "line-through" }
+              ? { backgroundColor: "grey" }
               : { textDecoration: "none" }
-          }
+          }>
+        <div className="check"
+          
         >
           <input
             type="checkbox"

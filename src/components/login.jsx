@@ -22,12 +22,13 @@ export default function Login() {
       e.preventDefault();
 
       setLoading(true);
-      const firstu = await axios.post("http://localhost:7070/api/users/login", {
+      const firstu = await axios.post("/api/users/login", {
         email,
        password,
       },
       //adding credentials to enable it set the cookie from the server
-      { withCredentials: true});
+      // { withCredentials: true}
+      );
 
       const res = firstu.data;
       setEmail("");

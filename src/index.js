@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import axios from 'axios';
 import './form.css'
 import App from './App';
 import Login from './components/login';
@@ -8,6 +9,11 @@ import Signup from './components/signup';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
+
+
+//axios making the api default
+axios.defaults.baseURL = "http://localhost:7070"
+axios.defaults.withCredentials = true
 
 ReactDOM.render(
   <React.StrictMode>

@@ -9,36 +9,54 @@ const Signup = () => {
   const [ password, setPassword ] = useState("");
   const [ username, setUsername ] = useState("");
   const [ confirmPassword, setconfirmPassword ] = useState("");
+  const [ error, setError ] = useState('')
+  const [ emailError, setEmailError] = useState('')
+  const [ passwordError, setPasswordError] = useState('')
+  const [ CpasswordError, setCPasswordError] = useState('')
   
   let navigate = useNavigate();
   //function for saving the data
   const addUser = async (e) => {
     try {
       e.preventDefault();
-    
-      //making a request to the api with axios for saving user data
-      const firstu = await axios.post("http://localhost:7070/api/users/save", {
-         username,
-         email,
-         password,
-      },
-      {withCredentials: true});
 
-      setEmail("");
-      setPassword('')
-      setUsername('')
-      const res = firstu.data
-
-      //if user is saved navigate to the todo page
-      if(res.user){
-        navigate('/')
-        // window.localStorage.setItem('userId',JSON.stringify(res._id))
-        // window.localStorage.setItem('name', JSON.stringify(res.username))
-        // <Navigate to='/todo'></Navigate>
-        // <Redirect to="/todo"></Redirect>
-          
+      if(email === ''){
+        setEmailError("Please enter email")
+      }else if(password === ''){
+        setPasswordError("Please enter password")
+      }else if(confirmPassword === ''){
+        setError("Please confirm your password")
       }
-      console.log(res.user);
+    else if(password === confirmPassword){
+      const firstu = await axios.post("/api/users/save", {
+        username,
+        email,
+        password,
+     },
+     // {withCredentials: true}
+     );
+
+     setEmail("");
+     setPassword('')
+     setUsername('')
+     const res = firstu.data
+
+     //if user is saved navigate to the todo page
+     if(res.user){
+       navigate('/')
+       // window.localStorage.setItem('userId',JSON.stringify(res._id))
+       // window.localStorage.setItem('name', JSON.stringify(res.username))
+       // <Navigate to='/todo'></Navigate>
+       // <Redirect to="/todo"></Redirect>
+         
+     }
+     console.log(res.user);
+    }else{
+      setError("password do not match")
+      console.log('password do not match')
+    }
+      //making a request to the api with axios for saving user data
+      
 
     } catch (error) {
       console.log(error);
@@ -74,6 +92,7 @@ const Signup = () => {
               placeholder="******@gmail.com"
               onChange={(e) => setEmail(e.target.value)}
             />
+            <span> {emailError} </span>
           </div>
 
           <div className="full">
@@ -85,6 +104,7 @@ const Signup = () => {
               placeholder="*********"
               onChange={(e) => setPassword(e.target.value)}
             />
+             <span> {passwordError} </span>
           </div>
 
           <div className="full">
@@ -96,11 +116,13 @@ const Signup = () => {
               placeholder="*********"
               onChange={(e) => setconfirmPassword(e.target.value)}
             />
+           
+            <span> {error} </span>
           </div>
 
           <button
             type="submit"
-            disabled={!email && !password && !username}
+            // disabled={!email && !password && !username && !confirmPassword}
             onClick={addUser}
           >
             Create Account

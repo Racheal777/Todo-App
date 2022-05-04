@@ -21,7 +21,7 @@ function App() {
 
       setLoading(true);
       // console.log(loading)
-      const add = await axios.post(`http://localhost:7070/savetodo/${JSON.parse(localStorage.getItem('userId'))}`, {
+      const add = await axios.post(`/savetodo/${JSON.parse(localStorage.getItem('userId'))}`, {
         todo: input,
         // id: JSON.parse(localStorage.getItem('userId'))
       });
@@ -43,8 +43,8 @@ function App() {
     try {
       setLoading(true);
       const deleteATodo = await axios.delete(
-        `http://localhost:7070/deletetodo/${id}`,
-        { withCredentials: true }  
+        `/deletetodo/${id}`,
+        // { withCredentials: true }  
       );
       // console.log(deleteATodo);
       setLoading(false);
@@ -58,26 +58,26 @@ function App() {
   const update = async (id) => {
     try {
       setLoading(true);
-      const getOne = await axios.get(`http://localhost:7070/gettodo/${id}`);
+      const getOne = await axios.get(`/gettodo/${id}`);
       const { data } = getOne;
 
       // setLoading(false)
       if (data.status === "pending") {
         let updated = await axios.put(
-          `http://localhost:7070/updatetodo/${data._id}`,
+          `/updatetodo/${data._id}`,
           {
             status: "done",
           },
-          { withCredentials: true }
+          // { withCredentials: true }
         );
         // setLoading(true)
       } else {
         let updat = await axios.put(
-          `http://localhost:7070/updatetodo/${data._id}`,
+          `/updatetodo/${data._id}`,
           {
             status: "pending",
           },
-          { withCredentials: true }
+          // { withCredentials: true }
         );
         console.log(updat);
       }
@@ -90,7 +90,7 @@ function App() {
   //fetching all todos
   useEffect(() => {
     const fetching = async () => {
-      const getTodos = await axios.get(`http://localhost:7070/api/users/oneuser/${JSON.parse(localStorage.getItem('userId'))}`);
+      const getTodos = await axios.get(`/api/users/oneuser/${JSON.parse(localStorage.getItem('userId'))}`);
       const { data } = getTodos;
       // const res = getTodos.data
       console.log(data)
@@ -137,7 +137,7 @@ function App() {
   const logout = async () => {
     try {
       const logg = await axios.get(
-        "http://localhost:7070/api/users/loggingout",
+        "/api/users/loggingout",
         { withCredentials: true }
       );
 
@@ -191,7 +191,7 @@ function App() {
             onChange={(e) => setInput(e.target.value)}
           />
 
-          <button type="submit" disabled={!input} onClick={addTodo}>
+          <button type="submit"  disabled={!input} onClick={addTodo}>
             Add a todo
           </button>
         </form>

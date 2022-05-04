@@ -73,3 +73,9 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     color: blue;
     text-decoration: none;
 }
+
+.full span{
+    color: red;
+    text-align: center;
+    padding: 4px 2px;
+}
