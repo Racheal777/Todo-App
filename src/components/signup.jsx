@@ -12,7 +12,7 @@ const Signup = () => {
   const [ error, setError ] = useState('')
   const [ emailError, setEmailError] = useState('')
   const [ passwordError, setPasswordError] = useState('')
-  const [ CpasswordError, setCPasswordError] = useState('')
+  
   
   let navigate = useNavigate();
   //function for saving the data
@@ -26,6 +26,8 @@ const Signup = () => {
         setPasswordError("Please enter password")
       }else if(confirmPassword === ''){
         setError("Please confirm your password")
+      }else if(password.length < 7){
+        setPasswordError('password must be more than 7')
       }
     else if(password === confirmPassword){
       const firstu = await axios.post("/api/users/save", {
@@ -39,18 +41,17 @@ const Signup = () => {
      setEmail("");
      setPassword('')
      setUsername('')
+     setconfirmPassword('')
      const res = firstu.data
 
      //if user is saved navigate to the todo page
      if(res.user){
-       navigate('/')
-       // window.localStorage.setItem('userId',JSON.stringify(res._id))
-       // window.localStorage.setItem('name', JSON.stringify(res.username))
-       // <Navigate to='/todo'></Navigate>
-       // <Redirect to="/todo"></Redirect>
-         
+       navigate('/')   
      }
-     console.log(res.user);
+     console.log(res)
+     if(res === "Email already exist"){
+       setEmailError(res)
+     };
     }else{
       setError("password do not match")
       console.log('password do not match')
