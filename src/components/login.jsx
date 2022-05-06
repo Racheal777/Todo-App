@@ -12,6 +12,9 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [ error , setError ] = useState('')
+  const [ emailError, setEmailError] = useState('')
+  const [ email2Error, setEmail2Error] = useState('')
+  const [ passwordError, setPasswordError] = useState('')
 
   const navigate = useNavigate()
   //function for saving the data
@@ -20,7 +23,11 @@ export default function Login() {
   const addUser = async (e) => {
     try {
       e.preventDefault();
-
+      if(email === ''){
+       return setEmailError("Please enter email")
+      }else if(password === ''){
+       return setPasswordError("Please enter password")
+      }
       setLoading(true);
       const firstu = await axios.post("/api/users/login", {
         email,
@@ -45,6 +52,9 @@ export default function Login() {
       
       console.log(res);
     } catch (error) {
+      if(error.message.includes("401")){
+        setError("Email or password does not exist")
+      }
       console.log(error);
     }
   };
@@ -58,10 +68,16 @@ export default function Login() {
     <div>
       <section className="form-body">
         <form onSubmit={addUser}>
+        
+
           <div className="title">
             <p>Welcome back </p>
             <h2>Login</h2>
           </div>
+          <div className="full">
+          {error && <span> {error} </span> } 
+          </div>
+         
 
           <div className="full">
             <label>Email</label>
@@ -72,6 +88,8 @@ export default function Login() {
               placeholder="******@gmail.com"
               onChange={(e) => setEmail(e.target.value)}
             />
+             {!email && <span> {emailError} </span>}
+             
           </div>
 
           <div className="full">
@@ -83,6 +101,7 @@ export default function Login() {
               placeholder="*********"
               onChange={(e) => setPassword(e.target.value)}
             />
+            {!password && <span> {passwordError} </span>}
           </div>
 
           <button type="submit" onClick={addUser}>

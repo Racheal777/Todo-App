@@ -11,6 +11,7 @@ const Signup = () => {
   const [ confirmPassword, setconfirmPassword ] = useState("");
   const [ error, setError ] = useState('')
   const [ emailError, setEmailError] = useState('')
+  const [ email2Error, setEmail2Error] = useState('')
   const [ passwordError, setPasswordError] = useState('')
   
   
@@ -49,9 +50,9 @@ const Signup = () => {
        navigate('/')   
      }
      console.log(res)
-     if(res === "Email already exist"){
-       setEmailError(res)
-     };
+    //  if(res === "Email already exist"){
+    //    setEmailError(res)
+    //  };
     }else{
       setError("password do not match")
       console.log('password do not match')
@@ -60,6 +61,9 @@ const Signup = () => {
       
 
     } catch (error) {
+      if(error.message.includes("409")){
+        setEmail2Error("Email already taken")
+      }
       console.log(error);
     }
   };
@@ -93,7 +97,8 @@ const Signup = () => {
               placeholder="******@gmail.com"
               onChange={(e) => setEmail(e.target.value)}
             />
-            <span> {emailError} </span>
+            {!email && <span> {emailError} </span>}
+            {email2Error && <span> {email2Error} </span> } 
           </div>
 
           <div className="full">
@@ -105,7 +110,8 @@ const Signup = () => {
               placeholder="*********"
               onChange={(e) => setPassword(e.target.value)}
             />
-             <span> {passwordError} </span>
+            {!password && <span> {passwordError} </span>}
+             
           </div>
 
           <div className="full">
