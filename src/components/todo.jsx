@@ -5,9 +5,9 @@ function Todo({ duty, del, update }) {
   const [ check, setCheck ] = useState(false);
 
   // console.log(setCheck)
-  useEffect(() => {
-    // console.log(check);
-  }, [check]);
+  // useEffect(() => {
+  //   console.log(check);
+  // }, [check]);
   return (
     <div>
       <div className="todo" 
@@ -16,14 +16,14 @@ function Todo({ duty, del, update }) {
               ? { backgroundColor: "grey" }
               : { textDecoration: "none" }
           }>
-        <div className="check"
-          
-        >
+            {/* {duty.status ==="done" && setCheck(!check)} */}
+        <div className="check">
           <input
             type="checkbox"
             name="Check"
             checked={check}
-            onChange={() => setCheck(!check)}
+            onChange={() => update(duty._id)} 
+            
           />
 
           <p className="pp" onClick={() => update(duty._id)}>
@@ -33,7 +33,7 @@ function Todo({ duty, del, update }) {
 
         <div className="btn">
           <p className="pending">{duty.status}</p>
-          {/* <button className='pending' onClick={() => update(duty.id)}>{duty.status}</button> */}
+          
           <button className="delete" onClick={() => del(duty._id)}>
             Delete
           </button>
