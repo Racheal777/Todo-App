@@ -110,7 +110,7 @@ const Signup = () => {
               placeholder="*********"
               onChange={(e) => setPassword(e.target.value)}
             />
-            {!password && <span> {passwordError} </span>}
+            <span> {passwordError} </span>
              
           </div>
 
@@ -124,7 +124,7 @@ const Signup = () => {
               onChange={(e) => setconfirmPassword(e.target.value)}
             />
            
-            <span> {error} </span>
+           <span> {error} </span>
           </div>
 
           <button

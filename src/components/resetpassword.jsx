@@ -5,7 +5,7 @@ import { Navigate, useNavigate} from "react-router-dom";
 
 
 
-export default function Login() {
+export default function ResetPassword() {
   //state for the user input
   const [loading, setLoading] = useState(false);
 
@@ -46,7 +46,7 @@ export default function Login() {
       if(res){
         navigate('/todo')
         window.localStorage.setItem('userId',JSON.stringify(res._id))
-        
+        window.localStorage.setItem('name', JSON.stringify(res.username))
       }
 
       

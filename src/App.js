@@ -11,6 +11,7 @@ function App() {
   
   const [ done, setDone ] = useState(0);
   const [ loading, setLoading ] = useState(false);
+  const [user, setUser] = useState('')
   let navigate = useNavigate();
 
   //adding a new todo to the list
@@ -95,6 +96,7 @@ function App() {
       // const res = getTodos.data
       console.log(data)
       setTodos(data.user.todos);
+      setUser(data.user.username)
     };
     fetching();
     // console.log(loading)
@@ -181,7 +183,8 @@ function App() {
       </div>
 
       <h2>To-do App</h2>
-    <p>Welcome <strong>{JSON.parse(localStorage.getItem("name"))}</strong></p>
+    {/* <p>Welcome <strong>{JSON.parse(localStorage.getItem("name"))}</strong></p> */}
+    <p>Welcome <strong> {user} </strong></p>
       <div className="main">
         <form onSubmit={addTodo} className="form">
           <input
