@@ -49,7 +49,7 @@ const Signup = () => {
      if(res.user){
        navigate('/')   
      }
-     console.log(res)
+    //  console.log(res)
     //  if(res === "Email already exist"){
     //    setEmailError(res)
     //  };

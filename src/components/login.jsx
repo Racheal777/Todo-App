@@ -50,7 +50,7 @@ export default function Login() {
       }
 
       
-      console.log(res);
+      // console.log(res);
     } catch (error) {
       if(error.message.includes("401")){
         setError("Email or password does not exist")

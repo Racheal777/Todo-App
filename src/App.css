@@ -4,26 +4,30 @@
   padding: 0;
   
 }
-body{
-  background: #FC354C;  
-background: -webkit-linear-gradient(to right, #0ABFBC, #FC354C); 
-background: linear-gradient(to right, #0ABFBC, #FC354C); 
 
-}
 
-body{
-  background: #000046;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #1CB5E0, #000046);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #1CB5E0, #000046); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-}
 /* body{
+  background: #000046;  
+background: -webkit-linear-gradient(to right, #1CB5E0, #000046);
+background: linear-gradient(to right, #1CB5E0, #000046);
+
+} */
+body{
   background: #43cea2;  
 background: -webkit-linear-gradient(to right, #185a9d, #43cea2);  
 background: linear-gradient(to right, #185a9d, #43cea2); 
 
 
-} */
+}
+
+.success{
+  margin: 3em auto;
+  padding: 1em;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  align-items: center;
+}
 strong{
   font-size: 1.8em;
   color: white; 
@@ -104,7 +108,12 @@ input:focus{
   padding: 0.7rem 0.5rem;
 }
 
-
+span{
+  text-align: center;
+  color: red;
+  font-weight: 400;
+  padding: 4px;
+}
 .btn{
   display: flex;
 
@@ -118,9 +127,12 @@ input:focus{
   color: white;
 
 }
-
+.logout{
+  display: flex;
+  justify-content: space-between;
+}
 .logout button{
-  border: none;
+  border: 2px solid white;
   padding: 0.5rem 1.6rem;
  font-size: 1em;
  /* margin: 6px 1em; */
@@ -129,7 +141,8 @@ input:focus{
   align-items: flex-end;
   justify-content: flex-end;
   display: flex;
-  background-color: rgb(5, 194, 241);
+  background-color: transparent;
+  /* background-color: rgb(5, 194, 241); */
 }
 
 .todoCard{
@@ -144,10 +157,11 @@ input:focus{
 
 .todoCard h2{
   text-align: center;
-  padding: 0.6em;
+  padding: 1.6em;
   font-family: fantasy;
   font-weight: bold;
   color: aliceblue;
+  font-size: 1.3em;
   text-transform: uppercase;
 }
 
@@ -157,6 +171,7 @@ text-align: center;
   font-family: fantasy;
   font-weight: bold;
   font-size: 1.2em;
+  color: black;
   /* margin-bottom: 2.6em; */
 }
 .pending{
