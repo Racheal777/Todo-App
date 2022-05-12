@@ -109,8 +109,12 @@ export default function Login() {
           </button>
 
           <p>
+            Forgot password ? <NavLink to="/forgotpassword">Click here</NavLink>
+          </p>
+          <p>
             Dont have an account <NavLink to="/register">Register</NavLink>
           </p>
+
         </form>
       </section>
     </div>

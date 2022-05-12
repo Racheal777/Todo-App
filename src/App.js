@@ -27,14 +27,21 @@ function App() {
   
   const [ done, setDone ] = useState(0);
   const [ loading, setLoading ] = useState(false);
+
+  //reset password
   const [ user, setUser ] = useState('')
   const [ Emailuser, setEmailUser ] = useState('')
-  const [ email, setEmail ] = useState("");
+  
   const [ password, setPassword ] = useState("");
   const [ newpassword, setNewpassword ] = useState('')
   const [ confirmnewpassword, setConfirmNewpassword ] = useState('')
-  const [ error, setError ] = useState('')
+  
   const [ success, setSuccess ] = useState('')
+  const [ passwordError, setPasswordError] = useState('')
+  const [ CpasswordError, setCPasswordError] = useState('')
+  const [ newpassworderror, setNewpassworderror ] = useState("");
+  const [ error, setError ] = useState('')
+  const [ confirmerror, setConfirmError ] = useState('')
 
 
 
@@ -153,6 +160,17 @@ function App() {
   const passwordChange = async (e) =>{
     e.preventDefault()
     try {
+      if(newpassword === password){
+        setNewpassworderror("cannot change new password with old")
+      }else if(password = ""){
+        setPasswordError("password required")
+      }else if(newpassword = ""){
+        setNewpassworderror("newpassword required")
+        // console.log("newpassword required")
+      }else if(confirmnewpassword = ""){
+        setError("password required")
+        // console.log("password required")
+      }
       if(confirmnewpassword === newpassword){
         const pass = await axios.put(`/api/users/reset/${JSON.parse(localStorage.getItem('userId'))}`,{
           email: Emailuser,
@@ -165,7 +183,7 @@ function App() {
           //setting timeout
           setTimeout(() => {
              navigate("/");
-          }, 3000)
+          }, 4000)
           
         }
         console.log(pass.data)
@@ -243,6 +261,7 @@ function App() {
                 autoFocus
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <span> {passwordError} </span>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -253,6 +272,7 @@ function App() {
                 autoFocus
                 onChange={(e) => setNewpassword(e.target.value)}
               />
+              <span> {newpassworderror} </span>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -287,6 +307,7 @@ function App() {
       <h2>To-do App</h2>
    
     <p>Welcome <strong> {user} </strong></p>
+    
       <div className="main">
         <form onSubmit={addTodo} className="form">
           <input

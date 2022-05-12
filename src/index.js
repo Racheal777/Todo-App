@@ -6,7 +6,9 @@ import axios from 'axios';
 import './form.css'
 import App from './App';
 import Login from './components/login';
+import PasswordReset from './auth/passwordReset';
 import Signup from './components/signup';
+import Forgotpassword from './auth/forgotPassword';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
@@ -23,6 +25,8 @@ ReactDOM.render(
   <Route path='/' element={<Login/>}></Route>
 <Route path='/todo' element={<App />}></Route>
 <Route path='/register' element={<Signup />}></Route>
+<Route path='/forgotpassword' element={<Forgotpassword />}></Route>
+<Route path='/reset-password' element={<PasswordReset/>}></Route>
   </Routes>
 
     </BrowserRouter>
