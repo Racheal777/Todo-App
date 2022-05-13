@@ -4,8 +4,8 @@ const Successful = () => {
     return (
         <div>
           <div className='success'>
-                <h1>Password successfully changed</h1>
-                <p>Please login with new password</p>
+                <h1>Password reset</h1>
+                <p>Please check your email for a link</p>
               </div>  
           
         </div>

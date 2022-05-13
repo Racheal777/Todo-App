@@ -55,7 +55,7 @@ function App() {
 
       setLoading(true);
       // console.log(loading)
-      const add = await axios.post(`/savetodo/${JSON.parse(localStorage.getItem('userId'))}`, {
+      const add = await axios.post(`/savetodo/${JSON.parse(localStorage.getItem('id'))}`, {
         todo: input,
         // id: JSON.parse(localStorage.getItem('userId'))
       });
@@ -124,7 +124,7 @@ function App() {
   //fetching all todos
   useEffect(() => {
     const fetching = async () => {
-      const getTodos = await axios.get(`/api/users/oneuser/${JSON.parse(localStorage.getItem('userId'))}`);
+      const getTodos = await axios.get(`/api/users/oneuser/${JSON.parse(localStorage.getItem('id'))}`);
       const { data } = getTodos;
       // const res = getTodos.data
       // console.log(data)
@@ -149,6 +149,7 @@ function App() {
       if (logg.data) {
         navigate("/");
         localStorage.removeItem("userId")
+        localStorage.removeItem("id")
         
       }
     } catch (error) {
@@ -162,17 +163,19 @@ function App() {
     try {
       if(newpassword === password){
         setNewpassworderror("cannot change new password with old")
-      }else if(password = ""){
+      }else if(password === ""){
         setPasswordError("password required")
-      }else if(newpassword = ""){
+      }else if(newpassword === ""){
         setNewpassworderror("newpassword required")
         // console.log("newpassword required")
-      }else if(confirmnewpassword = ""){
+      }else if(confirmnewpassword === ""){
         setError("password required")
         // console.log("password required")
       }
       if(confirmnewpassword === newpassword){
-        const pass = await axios.put(`/api/users/reset/${JSON.parse(localStorage.getItem('userId'))}`,{
+        console.log(typeof (JSON.parse(localStorage.getItem('id'))))
+        console.log(JSON.parse(localStorage.getItem('id')))
+        const pass = await axios.put(`/api/users/reset/${JSON.parse(localStorage.getItem('id'))}`,{
           email: Emailuser,
           password,
           newpassword
@@ -182,7 +185,9 @@ function App() {
 
           //setting timeout
           setTimeout(() => {
-             navigate("/");
+             navigate("/")
+             localStorage.removeItem("userId")
+        localStorage.removeItem("id")
           }, 4000)
           
         }

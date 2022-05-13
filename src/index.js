@@ -26,7 +26,7 @@ ReactDOM.render(
 <Route path='/todo' element={<App />}></Route>
 <Route path='/register' element={<Signup />}></Route>
 <Route path='/forgotpassword' element={<Forgotpassword />}></Route>
-<Route path='/reset-password' element={<PasswordReset/>}></Route>
+<Route path='/reset-password/:resetToken' element={<PasswordReset/>}></Route>
   </Routes>
 
     </BrowserRouter>

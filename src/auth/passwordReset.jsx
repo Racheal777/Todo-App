@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useParams } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 import Successful from "../components/successful";
 import Success from "../components/success";
 
@@ -18,8 +19,16 @@ export default function PasswordReset() {
     const [ CpasswordError, setCPasswordError] = useState('')
     const [ newpassworderror, setNewpassworderror ] = useState("");
     const [ error, setError ] = useState('')
+    const [userEmail, setUserEmail ] = useState('')
   
   const navigate = useNavigate()
+  const { resetToken } = useParams()
+
+  //grabing the token
+
+  
+
+  
   //function for saving the data
   //using the spread operator to get access to each object and assigning the value
   //to the field that matches the name
@@ -27,22 +36,18 @@ export default function PasswordReset() {
   const passwordChange = async (e) =>{
     e.preventDefault()
     try {
-      if(newpassword === password){
-        setNewpassworderror("cannot change new password with old")
-      }else if(password = ""){
-        setPasswordError("password required")
-      }else if(newpassword = ""){
+      
+     if(newpassword === ""){
         setNewpassworderror("newpassword required")
-        // console.log("newpassword required")
-      }else if(confirmnewpassword = ""){
+        
+      }else if(confirmnewpassword === ""){
         setError("password required")
-        // console.log("password required")
+        
       }
       if(confirmnewpassword === newpassword){
-        const pass = await axios.put(`/api/users/reset/${JSON.parse(localStorage.getItem('userId'))}`,{
-          email: email,
-          password,
-          newpassword
+        console.log('checking')
+        const pass = await axios.put(`/api/users/resetpassword/${resetToken}`,{
+         newpassword
         })
         if(pass.data){
           setSuccess('Password changed successfully')
@@ -53,7 +58,7 @@ export default function PasswordReset() {
           }, 4000)
           
         }
-        console.log(pass.data)
+        // console.log(pass.data)
         
       }else{
         setError("password do not match")
@@ -75,39 +80,13 @@ export default function PasswordReset() {
         
 
           <div className="title">
-            <p>Welcome back </p>
+            {/* <p>Welcome back </p> */}
             <h2>Reset Password</h2>
           </div>
           <div className="full">
           {error && <span> {error} </span> } 
           </div>
          
-
-          <div className="full">
-            <label>Email</label>
-            <input
-              type="email"
-              name="email"
-              value={email}
-              placeholder="******@gmail.com"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-             {/* {!email && <span> {emailError} </span>} */}
-             
-          </div>
-
-          <div className="full">
-            <label>Old Password</label>
-            <input
-              type="password"
-              name="password"
-              value={password}
-              placeholder="*********"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            {!password && <span> {passwordError} </span>}
-          </div>
-
           <div className="full">
             <label>New Password</label>
             <input

@@ -41,11 +41,12 @@ export default function Login() {
       setEmail("");
       setPassword("");
       setLoading(false);
-      console.log(res)
+      // console.log(res)
       //if user is found, navigate the user to the todo app
       if(res){
         navigate('/todo')
         window.localStorage.setItem('userId',JSON.stringify(res._id))
+        window.localStorage.setItem('id',JSON.stringify(res._id))
         
       }
 

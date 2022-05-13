@@ -28,9 +28,9 @@ const Forgotpassword = () => {
           }
           setEmail("");
           
-          setTimeout(() => {
-            navigate("/");
-          }, 4000)
+          // setTimeout(() => {
+          //   navigate("/");
+          // }, 4000)
           setLoading(false);
           
         } catch (error) {
@@ -50,7 +50,7 @@ const Forgotpassword = () => {
 
           <div className="title">
             
-            <h2>Password reset</h2>
+            <h2> Forgot Password</h2>
           </div>
           <div className="full">
           {error && <span> {error} </span> } 
