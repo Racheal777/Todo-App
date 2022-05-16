@@ -224,10 +224,17 @@ function App() {
     // console.log(done)
   }, [todos, done]);
 
-  return (success ? (
+  return (
+     success ? (
       <Success/>
       ):
+<Container fluid>
+      <Row className="mains"> 
+      
+
+      
     <div className="todoCard">
+    <Col>
       <div className="logout">
       <Button variant="primary" onClick={logout}>
       Logout
@@ -304,11 +311,11 @@ function App() {
         </Modal.Footer>
       </Modal>
       </>
-      
-  
     </>
     
     </div>
+    </Col>
+   <Col>
       <h2>To-do App</h2>
    
     <p>Welcome <strong> {user} </strong></p>
@@ -329,6 +336,9 @@ function App() {
 
         {loading && <div style={{ color: "red" }}>Please wait ....</div>}
       </div>
+      </Col>
+
+<Col>
 
       {todos.length > 0 && (
         <p>
@@ -339,8 +349,10 @@ function App() {
       )}
 
       <Todos tasks={todos} deleteTodo={deleteTodo} update={update} />
-      
+      </Col> 
     </div>
+    </Row>
+    </Container>
   );
 }
 
