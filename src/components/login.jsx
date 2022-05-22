@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import {
   Row,
   Col,
@@ -22,6 +22,7 @@ export default function Login() {
   const [error, setError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [email2Error, setEmail2Error] = useState("");
+  const [verifyerror, setVerifyError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
   const navigate = useNavigate();
@@ -43,8 +44,7 @@ export default function Login() {
           email,
           password,
         }
-        //adding credentials to enable it set the cookie from the server
-        // { withCredentials: true}
+        
       );
 
       const res = firstu.data;
@@ -63,8 +63,8 @@ export default function Login() {
     } catch (error) {
       if (error.message.includes("401")) {
         setError("Email or password does not exist");
-      }else if(error.message.includes('401')){
-        setError('Your Email has not been verified')
+      }else if(error.message.includes('400')){
+        setVerifyError(`Your Email has not been verified `)
       }
 
       console.log(error);
@@ -88,6 +88,7 @@ export default function Login() {
                   <h2>Login</h2>
                 </div>
                 <div className="full">{error && <span> {error} </span>}</div>
+                <div className="full">{verifyerror && <span> {verifyerror} <Link to = "/resend-link">Resend Link</Link> </span>}</div>
 
                 <div className="full">
                   <label>Email</label>
@@ -121,6 +122,7 @@ export default function Login() {
                   Forgot password ?{" "}
                   <NavLink to="/forgotpassword">Click here</NavLink>
                 </p>
+                
                 <p>
                   Dont have an account{" "}
                   <NavLink to="/register">Register</NavLink>

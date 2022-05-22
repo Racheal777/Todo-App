@@ -10,6 +10,7 @@ import PasswordReset from './auth/passwordReset';
 import Signup from './components/signup';
 import Forgotpassword from './auth/forgotPassword';
 import VerifiedEmail from './auth/verifiedEmail';
+import ResendLink from './auth/resendLink';
 
 import reportWebVitals from './reportWebVitals';
 import EmailVerifiedd from './auth/EmailVerified';
@@ -31,6 +32,7 @@ ReactDOM.render(
 <Route path='/forgotpassword' element={<Forgotpassword />}></Route>
 <Route path='/reset-password/:resetToken' element={<PasswordReset/>}></Route>
 <Route path='/verify-email/:id/:token' element={<EmailVerifiedd/>}></Route>
+<Route path='/resend-link' element={<ResendLink/>}></Route>
   </Routes>
 
     </BrowserRouter>
