@@ -63,7 +63,10 @@ export default function Login() {
     } catch (error) {
       if (error.message.includes("401")) {
         setError("Email or password does not exist");
+      }else if(error.message.includes('401')){
+        setError('Your Email has not been verified')
       }
+
       console.log(error);
     }
   };

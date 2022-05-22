@@ -10,6 +10,8 @@ import {
   Carousel,
   Modal,
 } from "react-bootstrap";
+import VerifiedEmail from "../auth/verifiedEmail";
+import Successful from "./successful";
 
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
 
@@ -22,6 +24,7 @@ const Signup = () => {
   const [emailError, setEmailError] = useState("");
   const [email2Error, setEmail2Error] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [success, setSuccess] = useState("");
 
   let navigate = useNavigate();
   //function for saving the data
@@ -39,7 +42,7 @@ const Signup = () => {
         setPasswordError("password must be more than 7");
       } else if (password === confirmPassword) {
         const firstu = await axios.post(
-          "/api/users/save",
+          "/api/users/signup",
           {
             username,
             email,
@@ -56,7 +59,13 @@ const Signup = () => {
 
         //if user is saved navigate to the todo page
         if (res.user) {
-          navigate("/");
+          setSuccess("Password changed successfully");
+          // navigate("/");
+
+          // setTimeout(() => {
+          //   navigate("/");
+          // }, 4000);
+
         }
         //  console.log(res)
         //  if(res === "Email already exist"){
@@ -76,7 +85,9 @@ const Signup = () => {
   };
 
   // console.log(email, password, username);
-  return (
+  return success ? (
+    < VerifiedEmail/>
+  ) : (
     <div>
       <Container fluid>
         <Row className="formz">
@@ -153,7 +164,7 @@ const Signup = () => {
         </Row>
       </Container>
     </div>
-  );
+  )
 };
 
 export default Signup;

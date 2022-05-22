@@ -9,7 +9,10 @@ import Login from './components/login';
 import PasswordReset from './auth/passwordReset';
 import Signup from './components/signup';
 import Forgotpassword from './auth/forgotPassword';
+import VerifiedEmail from './auth/verifiedEmail';
+
 import reportWebVitals from './reportWebVitals';
+import EmailVerifiedd from './auth/EmailVerified';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
 
@@ -27,6 +30,7 @@ ReactDOM.render(
 <Route path='/register' element={<Signup />}></Route>
 <Route path='/forgotpassword' element={<Forgotpassword />}></Route>
 <Route path='/reset-password/:resetToken' element={<PasswordReset/>}></Route>
+<Route path='/verify-email/:id/:token' element={<EmailVerifiedd/>}></Route>
   </Routes>
 
     </BrowserRouter>
