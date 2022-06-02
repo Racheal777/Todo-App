@@ -15,7 +15,7 @@ export default function EmailVerifiedd() {
             }
         }
         checkVerified()
-    })
+    }, [])
   return (
     <div>
         

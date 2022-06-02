@@ -9,39 +9,39 @@ import {
   Col,
   Container,
   Form,
-  FormControl,
+  
   Button,
-  Carousel,
+  
   Modal,
 } from "react-bootstrap";
 
 function App() {
-  const [show, setShow] = useState(false);
+  const [ show, setShow ] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [input, setInput] = useState("");
+  const [ input, setInput ] = useState("");
 
-  const [todos, setTodos] = useState([]);
+  const [ todos, setTodos ] = useState([]);
 
-  const [done, setDone] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [ done, setDone ] = useState(0);
+  const [ loading, setLoading ] = useState(false);
 
   //reset password
   const [user, setUser] = useState("");
   const [Emailuser, setEmailUser] = useState("");
 
-  const [password, setPassword] = useState("");
-  const [newpassword, setNewpassword] = useState("");
-  const [confirmnewpassword, setConfirmNewpassword] = useState("");
+  const [ password, setPassword ] = useState("");
+  const [ newpassword, setNewpassword ] = useState("");
+  const [ confirmnewpassword, setConfirmNewpassword ] = useState("");
 
-  const [success, setSuccess] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [CpasswordError, setCPasswordError] = useState("");
-  const [newpassworderror, setNewpassworderror] = useState("");
-  const [error, setError] = useState("");
-  const [confirmerror, setConfirmError] = useState("");
+  const [ success, setSuccess ] = useState("");
+  const [ passwordError, setPasswordError ] = useState("");
+  
+  const [ newpassworderror, setNewpassworderror ] = useState("");
+  const [ error, setError ] = useState("");
+  
 
   let navigate = useNavigate();
 
